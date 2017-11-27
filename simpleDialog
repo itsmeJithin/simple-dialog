@@ -1,0 +1,91 @@
+;(function ($) {
+$.simpleDialog = function (options, callback=null) {
+        var template = null;
+
+        /**
+        *Validating options given to the simpleDialog.
+        *User can either pass modal content or title with message.
+        */
+        function valdateOptions(callback) {
+            console.log(options);
+            if ((options.title || options.message) && options.modalContent) {
+                console.error("simpleDialog only accepts either modal content or title and message");
+                return;
+            }
+            else {
+                callback();
+            }
+        }
+
+
+        /**
+         * Initializing modal with modal options
+         */
+        function init() {
+            var closeButtonTemplate = '';
+            if (options.closeButton) {
+                closeButtonTemplate = '<button type="button" id ="cancel-btn" class="btn btn-default">' + options.closeBtnText + '</button>';
+            }
+
+            template = '<div class="modal fade w-t-40" id="simple-dialog-modal" tabindex="-1" role="dialog" data-backdrop="' + options.backdrop + '"' +
+                '           aria-labelledby="eventDetailsModal">' +
+                '           <div class="modal-dialog" role="document">' +
+                '               <div class="modal-content">' + options.modalContent +
+                '                   <div class="modal-footer no-border">' + closeButtonTemplate +
+                '                       <button type="button" id="confirm-btn" class=" btn btn-primary">' + options.confirmBtnText + '</button>' +
+                '                   </div>' +
+                '               </div>' +
+                '           </div>' +
+                '       </div>';
+            if (!$('body').hasClass('model-open')) {
+                $('body').append(template);
+                $('#simple-dialog-modal').modal('show');
+            }
+        }
+
+        /**
+         * Handling confirm button click event. If callback is available perform callback operation
+         */
+        $('#confirm-btn').live('click', function (event) {
+            event.preventDefault();
+            $('#simple-dialog-modal').modal('hide');
+            if (callback !== null)
+                callback();
+        });
+
+        /**
+         * Handling close button events
+         */
+        $('#cancel-btn').live('click', function (event) {
+            event.preventDefault();
+            return $('#simple-dialog-modal').modal('hide');
+        });
+
+        /**
+         * removing appended modal from body when modal become hidden
+         */
+        $(document).on('hidden.bs.modal', '#simple-dialog-modal', function () {
+            return $('#simple-dialog-modal').remove();
+        });
+
+        valdateOptions(function () {
+            /**
+             * Default options
+             */
+            options = $.extend({
+                title: 'Confirm',
+                message: 'Do you want to continue?',
+                modalContent: '<div class="modal-header bg-white">' +
+                '                  <h4 class="modal-title capitalize-first-letter" id="exampleModalLabel">' + options.title + '</h4>' +
+                '               </div>' +
+                '               <div class="modal-body ">' + options.message +
+                '               </div>',
+                confirmBtnText: 'Okay',
+                closeBtnText: 'close',
+                backdrop: false,
+                closeButton: true
+            }, options);
+            init();
+        });
+    };
+})(jQuery);

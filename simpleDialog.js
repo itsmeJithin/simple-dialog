@@ -18,14 +18,15 @@ $.simpleDialog = function (options, callback) {
          */
         function init() {
             var closeButtonTemplate = '';
-
-            if (options.modalHasContent == false) {
+            if (options.modalContent) {
                 options.modalContent = options.modalContent.strReplace({
                     title: options.title,
                     message: options.message
                 });
+            } else {
+                console.error("Empty modal content. simpleDialog only accepts either modal content or title and message");
+                return;
             }
-
             closeButtonTemplate = '<button type="button" id ="cancel-btn" class="btn btn-default">' + options.closeBtnText + '</button>';
 
             template = '<div class="modal fade w-t-40" id="simple-dialog-modal" tabindex="-1" role="dialog" data-backdrop="' + options.backdrop + '"' +
@@ -80,7 +81,6 @@ $.simpleDialog = function (options, callback) {
             options = $.extend({
                 title: 'Confirm',
                 message: 'Do you want to continue?',
-                modalHasContent: false,
                 modalContent: '<div class="modal-header bg-white">' +
                 '                  <h4 class="modal-title capitalize-first-letter" id="exampleModalLabel">{title}</h4>' +
                 '               </div>' +

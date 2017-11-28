@@ -1,19 +1,14 @@
 ;(function ($) {
-$.simpleDialog = function (options, callback=null) {
+$.simpleDialog = function (options, callback) {
         var template = null;
 
-        /**
-        *Validating options given to the simpleDialog.
-        *User can either pass modal content or title with message.
-        */
-        function valdateOptions(callback) {
-            console.log(options);
+        function valdateOptions(success) {
             if ((options.title || options.message) && options.modalContent) {
                 console.error("simpleDialog only accepts either modal content or title and message");
                 return;
             }
             else {
-                callback();
+                success();
             }
         }
 
@@ -23,9 +18,15 @@ $.simpleDialog = function (options, callback=null) {
          */
         function init() {
             var closeButtonTemplate = '';
-            if (options.closeButton) {
-                closeButtonTemplate = '<button type="button" id ="cancel-btn" class="btn btn-default">' + options.closeBtnText + '</button>';
+
+            if (options.modalHasContent == false) {
+                options.modalContent = options.modalContent.strReplace({
+                    title: options.title,
+                    message: options.message
+                });
             }
+
+            closeButtonTemplate = '<button type="button" id ="cancel-btn" class="btn btn-default">' + options.closeBtnText + '</button>';
 
             template = '<div class="modal fade w-t-40" id="simple-dialog-modal" tabindex="-1" role="dialog" data-backdrop="' + options.backdrop + '"' +
                 '           aria-labelledby="eventDetailsModal">' +
@@ -49,7 +50,7 @@ $.simpleDialog = function (options, callback=null) {
         $('#confirm-btn').live('click', function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
-            if (callback !== null)
+            if (typeof callback === 'function' && callback())
                 callback();
         });
 
@@ -62,12 +63,16 @@ $.simpleDialog = function (options, callback=null) {
         });
 
         /**
-         * removing appended modal from body when modal become hidden
+         * removing appended modal from body and reset callback to null when modal become hidden
          */
         $(document).on('hidden.bs.modal', '#simple-dialog-modal', function () {
+            callback = null;
             return $('#simple-dialog-modal').remove();
         });
 
+        /**
+         * Validating options in simpleDaialog
+         */
         valdateOptions(function () {
             /**
              * Default options
@@ -75,10 +80,11 @@ $.simpleDialog = function (options, callback=null) {
             options = $.extend({
                 title: 'Confirm',
                 message: 'Do you want to continue?',
+                modalHasContent: false,
                 modalContent: '<div class="modal-header bg-white">' +
-                '                  <h4 class="modal-title capitalize-first-letter" id="exampleModalLabel">' + options.title + '</h4>' +
+                '                  <h4 class="modal-title capitalize-first-letter" id="exampleModalLabel">{title}</h4>' +
                 '               </div>' +
-                '               <div class="modal-body ">' + options.message +
+                '               <div class="modal-body ">{message}' +
                 '               </div>',
                 confirmBtnText: 'Okay',
                 closeBtnText: 'close',
@@ -87,5 +93,32 @@ $.simpleDialog = function (options, callback=null) {
             }, options);
             init();
         });
+    };
+
+    /**
+     * String replace function to replace variables with values in a string.
+     * @type {{strReplace}}
+     */
+    var Strings = {
+        strReplace: (function () {
+            var regexp = /{([^{]+)}/g;
+            return function (str, options) {
+                return str.replace(regexp, function (ignore, key) {
+                    return (key = options[key]) == null ? '' : key;
+                });
+            }
+        })()
+
+    };
+
+    /**
+     * Attaching strReplace to String.prototype,
+     * thereby we can use "hai {name}".strReplace({name:"robert"});
+     * or variable1.strReplace({example1:"example1"});
+     * @param object options
+     * @returns {*}
+     */
+    String.prototype.strReplace = function (options) {
+        return Strings.strReplace(this, options);
     };
 })(jQuery);

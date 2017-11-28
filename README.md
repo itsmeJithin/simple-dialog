@@ -30,7 +30,7 @@ $.simpleDialog({},function(){
 });
 </script>
 ```
-* simpleDialog with options
+* simpleDialog with options and callback
 
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
@@ -46,3 +46,25 @@ $.simpleDialog({},function(){
 });
 </script>
 ```
+* simpleDialog with html element
+```
+<script type="text/javascript" src="/simpleDialog.js"></script>
+<script type="text/javascript">
+var html = '<div class="modal-header bg-white">'+
+            '   <h4 class="modal-title capitalize-first-letter" id="modalHeader">Confirm</h4>'+
+            '</div>'+
+            '<div class="modal-body">'+
+            '   <div class="row">'+
+            '     <div class="col-md-12">Do you want to continue?</div>'+
+            '   </div>'+
+            '</div>';
+  $.simpleDialog({
+    modalContent: html,
+    closeBtnText: "Cancel",
+    backdrop:true
+  },function(){
+  alert("You confirmed");
+});
+</script>
+```
+You can pass either modal content or title and message. 

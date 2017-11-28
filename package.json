@@ -1,0 +1,29 @@
+{
+  "name": "simpleDialog",
+  "version": "0.1.1",
+  "description": "A simple dialog box for the browser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ovaqlab/simpleDialog.git"
+  },
+  "keywords": [
+    "browser",
+    "dialog",
+    "box",
+    "bootstrap",
+    "events",
+    "modal",
+    "overlay",
+    "backdrop"
+  ],
+  "author": "Ovaqlab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ovaqlab/simpleDialog/issues"
+  },
+  "homepage": "https://github.com/ovaqlab/simpleDialog",
+  "dependencies": {
+    "bootstrap": "^3.3.6"",
+    "jquery": "^3.2.0"
+  }
+}

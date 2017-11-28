@@ -30,7 +30,7 @@ $.simpleDialog({},function(){
 });
 </script>
 ```
-*simpleDialog with options
+* simpleDialog with options
 
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>

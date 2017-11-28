@@ -13,7 +13,7 @@ simple bootstrap modal with multiple content options
 
 # Usage
 
-*Basic Usage 
+* Basic Usage 
 
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>

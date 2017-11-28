@@ -1,5 +1,5 @@
 ;(function ($) {
-$.simpleDialog = function (options, callback) {
+$.simpleDialog = function (options, onSuccess) {
         var template = null;
 
         function valdateOptions(success) {
@@ -51,8 +51,8 @@ $.simpleDialog = function (options, callback) {
         $('#confirm-btn').live('click', function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
-            if (typeof callback === 'function' && callback())
-                callback();
+            if (typeof onSuccess === 'function' && onSuccess())
+                onSuccess();
         });
 
         /**
@@ -67,7 +67,7 @@ $.simpleDialog = function (options, callback) {
          * removing appended modal from body and reset callback to null when modal become hidden
          */
         $(document).on('hidden.bs.modal', '#simple-dialog-modal', function () {
-            callback = null;
+            onSuccess = null;
             return $('#simple-dialog-modal').remove();
         });
 

@@ -12,8 +12,8 @@ simple bootstrap modal with multiple content options
 * Responsive UI
 
 # Usage
-
-* Basic Usage 
+### You must use Bootstrap css and js for proper working of simple dialog
+#### * Basic Usage 
 
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
@@ -21,7 +21,7 @@ simple bootstrap modal with multiple content options
 $.simpleDialog();
 </script>
 ```
-* simpleDialog with callback
+#### * simpleDialog with callback
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
 <script type="text/javascript>
@@ -30,7 +30,7 @@ $.simpleDialog({},function(){
 });
 </script>
 ```
-* simpleDialog with options and callback
+#### * simpleDialog with options and callback
 
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
@@ -46,7 +46,7 @@ $.simpleDialog({},function(){
 });
 </script>
 ```
-* simpleDialog with html element
+#### * simpleDialog with html element
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
 <script type="text/javascript">

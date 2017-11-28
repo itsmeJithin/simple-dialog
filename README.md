@@ -34,7 +34,7 @@ $.simpleDialog({},function(){
 
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
-<scripttype="text/javascript">
+<script type="text/javascript">
   $.simpleDialog({
     title:"Confirm",
     message:"Do you want to continue?",

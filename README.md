@@ -5,7 +5,7 @@ Simple bootstrap-jquery modal with options to change contents and style
 
 # Features
 * Content from html elements or string  
-* Backdrop enable and disable (optionsal)
+* Backdrop enable and disable (optional)
 * Buttons show/hide options (optional)
 * Callback functions for success/confirm operations (optional)
 * Working with bootstrap

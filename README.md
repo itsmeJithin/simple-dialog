@@ -1,4 +1,4 @@
-# simpleDialog[![Platform](https://img.shields.io/badge/Platform-jQuery-brightgreen.svg) ]()
+# simpleDialog  [![Platform](https://img.shields.io/badge/Platform-jQuery-brightgreen.svg) ]() [![GitHub license](https://img.shields.io/badge/License-MIT-orange.svg)]
 simple bootstrap modal with multiple content options
 
 ![Open Dialog Window](https://github.com/ovaqlab/simpleDialog/blob/master/screenshot.png)

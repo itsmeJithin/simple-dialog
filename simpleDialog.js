@@ -1,5 +1,5 @@
 ;(function ($) {
-$.simpleDialog = function (options, onSuccess) {
+$.simpleDialog = function (options, onSuccess, onClose) {
         var template = null;
 
         function valdateOptions(success) {
@@ -17,7 +17,6 @@ $.simpleDialog = function (options, onSuccess) {
          * Initializing modal with modal options
          */
         function init() {
-            var closeButtonTemplate = '';
             if (options.modalContent) {
                 options.modalContent = options.modalContent.strReplace({
                     title: options.title,
@@ -27,13 +26,20 @@ $.simpleDialog = function (options, onSuccess) {
                 console.error("Empty modal content. simpleDialog only accepts either modal content or title and message");
                 return;
             }
-            closeButtonTemplate = '<button type="button" id ="cancel-btn" class="btn btn-default">' + options.closeBtnText + '</button>';
 
-            template = '<div class="modal fade w-t-40" id="simple-dialog-modal" tabindex="-1" role="dialog" data-backdrop="' + options.backdrop + '"' +
+            if (!options.closeButton)
+                options.closeButtonTemplate = '';
+            else {
+                options.closeButtonTemplate = options.closeButtonTemplate.strReplace({
+                    closeBtnText: options.closeBtnText
+                });
+            }
+
+            template = '<div class="modal fade window-t-xs-40" id="simple-dialog-modal" tabindex="-1" role="dialog" data-backdrop="' + options.backdrop + '"' +
                 '           aria-labelledby="eventDetailsModal">' +
                 '           <div class="modal-dialog" role="document">' +
                 '               <div class="modal-content">' + options.modalContent +
-                '                   <div class="modal-footer no-border">' + closeButtonTemplate +
+                '                   <div class="modal-footer no-border">' + options.closeButtonTemplate +
                 '                       <button type="button" id="confirm-btn" class=" btn btn-primary">' + options.confirmBtnText + '</button>' +
                 '                   </div>' +
                 '               </div>' +
@@ -51,8 +57,9 @@ $.simpleDialog = function (options, onSuccess) {
         $('#confirm-btn').live('click', function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
-            if (typeof onSuccess === 'function' && onSuccess())
-                onSuccess();
+            if (typeof options.onSuccess === 'function' && options.onSuccess()) {
+                options.onSuccess();
+            }
         });
 
         /**
@@ -60,14 +67,17 @@ $.simpleDialog = function (options, onSuccess) {
          */
         $('#cancel-btn').live('click', function (event) {
             event.preventDefault();
-            return $('#simple-dialog-modal').modal('hide');
+            $('#simple-dialog-modal').modal('hide');
+            if (typeof options.onCancel === 'function' && options.onCancel())
+                options.onCancel();
         });
 
         /**
          * removing appended modal from body and reset callback to null when modal become hidden
          */
         $(document).on('hidden.bs.modal', '#simple-dialog-modal', function () {
-            onSuccess = null;
+            options.onSuccess = null;
+            options.onCancel = null;
             return $('#simple-dialog-modal').remove();
         });
 
@@ -88,8 +98,11 @@ $.simpleDialog = function (options, onSuccess) {
                 '               </div>',
                 confirmBtnText: 'Okay',
                 closeBtnText: 'close',
-                backdrop: false,
-                closeButton: true
+                backdrop: true,
+                closeButton: true,
+                closeButtonTemplate: '<button type="button" id ="cancel-btn" class="btn btn-default">{closeBtnText}</button>',
+                onSuccess: null,
+                onCancel: null
             }, options);
             init();
         });

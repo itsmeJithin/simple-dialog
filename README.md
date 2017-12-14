@@ -23,8 +23,8 @@ Include below code before </body> tag
   ```<script type="text/javascript" src="/simpleDialog.js"></script>```
   
 ## Usage
+##### Example: https://codepen.io/iamjithz/live/eymqmL
 ####  Basic Usage 
-
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
 <script type="text/javascript>

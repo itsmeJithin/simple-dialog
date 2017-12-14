@@ -3,7 +3,7 @@ Simple bootstrap-jquery modal with options to change contents and style
 
 ![Open Dialog Window](https://github.com/ovaqlab/simpleDialog/blob/master/screenshot.png)
 
-# Features
+## Features
 * Content from html elements or string  
 * Backdrop enable and disable (optional)
 * Buttons show/hide options (optional)
@@ -11,8 +11,17 @@ Simple bootstrap-jquery modal with options to change contents and style
 * Working with bootstrap
 * Responsive UI
 
-# Usage
-### You must use Bootstrap css and js for proper working of simple dialog
+## Prerequisites
+
+Must include bootstrap css and js files before simpleDialog.js for proper working. 
+
+## Installing
+
+Include below code before </body> tag
+
+  ```<script type="text/javascript" src="/simpleDialog.js"></script>```
+  
+## Usage
 ####  Basic Usage 
 
 ```
@@ -25,8 +34,13 @@ $.simpleDialog();
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
 <script type="text/javascript>
-$.simpleDialog({},function(){
-  alert("You confirmed");
+$.simpleDialog({
+    onSuccess:function(){
+        alert("You confirmed");
+    },
+    onCancel:function(){
+        alert("You cancelled");
+    }
 });
 </script>
 ```
@@ -40,10 +54,14 @@ $.simpleDialog({},function(){
     message:"Do you want to continue?",
     confirmBtnText: "Yes! I'm Sure",
     closeBtnText: "Cancel",
-    backdrop:true
-  },function(){
-  alert("You confirmed");
-});
+    backdrop:true,
+    onSuccess:function(){
+      alert("You confirmed");
+    },
+    onCancel:function(){
+      alert("you cancelled");
+    }
+  });
 </script>
 ```
 ####  simpleDialog with html element
@@ -61,10 +79,22 @@ var html = '<div class="modal-header bg-white">'+
   $.simpleDialog({
     modalContent: html,
     closeBtnText: "Cancel",
-    backdrop:true
-  },function(){
-  alert("You confirmed");
-});
+    backdrop:true,
+    onSuccess:function(){
+      alert("You confirmed");
+    }
+  });
 </script>
 ```
 You can pass either modal content or title and message. 
+
+## Built With
+  * jQuery
+  * Bootstrap
+
+## License
+  This project is licensed under the MIT License
+
+## Acknowledgments
+  * bootstrap modal
+

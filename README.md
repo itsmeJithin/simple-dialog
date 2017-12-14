@@ -12,8 +12,9 @@ Simple bootstrap-jquery modal with options to change contents and style
 * Responsive UI
 
 ## Prerequisites
-
-Must include bootstrap css and js files before simpleDialog.js for proper working. 
+  * Bootstrap CSS
+  * Bootstrap JS
+  * jQuery
 
 ## Installing
 

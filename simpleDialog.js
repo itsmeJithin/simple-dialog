@@ -54,7 +54,7 @@ $.simpleDialog = function (options, onSuccess, onClose) {
         /**
          * Handling confirm button click event. If callback is available perform callback operation
          */
-        $('#confirm-btn').live('click', function (event) {
+        $(document).on('click',"#confirm-btn", function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
             if (typeof options.onSuccess === 'function' && options.onSuccess()) {
@@ -65,7 +65,7 @@ $.simpleDialog = function (options, onSuccess, onClose) {
         /**
          * Handling close button events
          */
-        $('#cancel-btn').live('click', function (event) {
+        $(document).on('click',"#cancel-btn", function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
             if (typeof options.onCancel === 'function' && options.onCancel())

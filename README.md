@@ -124,12 +124,15 @@ $.simpleDialog({
 $.simpleDialog({
   closeButton: true,
   closeButtonTemplate: '<button type="button" id ="cancel-btn" class="btn btn-default">{closeBtnText}</button>',
-});```
+});
+```
 
 #### Remove close button from modal
-```$.simpleDialog({
+``` 
+$.simpleDialog({
   closeButton: false,
-});```
+}); 
+```
 
 ## Built With
   * jQuery

@@ -65,7 +65,7 @@ $.simpleDialog({
   });
 </script>
 ```
-####  simpleDialog with html element
+####  simpleDialog with html strings
 ```
 <script type="text/javascript" src="/simpleDialog.js"></script>
 <script type="text/javascript">
@@ -88,6 +88,35 @@ var html = '<div class="modal-header bg-white">'+
 </script>
 ```
 You can pass either modal content or title and message. 
+
+#### Customize the text of confirm and cancel buttons
+```
+$.simpleDialog({
+  title:"Alert Dialog",
+  message:"Alert Message",
+  confirmBtnText: 'Confirm',
+  closeBtnText: 'Cancel',
+  onSuccess:function(){
+    alert("You confirmed");
+  },
+  onCancel:function(){
+    alert("You cancelled");
+  }
+});
+
+```
+#### Decide whether to show the background overlay
+```
+$.simpleDialog({
+  backdrop: true
+});
+```
+#### Config the close button which allows you to close the dialog manually
+
+$.simpleDialog({
+  closeButton: true,
+  closeButtonTemplate: '<button type="button" id ="cancel-btn" class="btn btn-default">{closeBtnText}</button>',
+});
 
 ## Built With
   * jQuery

@@ -1,5 +1,5 @@
 # simpleDialog  [![Platform](https://img.shields.io/badge/Platform-jQuery-brightgreen.svg) ]() [![GitHub license](https://img.shields.io/badge/License-MIT-orange.svg)]() [![Author](https://img.shields.io/badge/Author-Ovaqlab-blue.svg)]()
-Simple bootstrap-jquery modal with options to change contents and style
+simpleDialog is a jQuery plugin to create responsive, customizable alert, confirmation dialog popups with Bootstrap modal components. Compatible with both Bootstrap 3 and Bootstrap 4.
 
 ![Open Dialog Window](https://github.com/ovaqlab/simpleDialog/blob/master/screenshot.png)
 

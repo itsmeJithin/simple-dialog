@@ -18,7 +18,7 @@ Simple bootstrap-jquery modal with options to change contents and style
 
 ## Installing
 
-Include below code before </body> tag
+Download and load the simpleDialog plugin's script after jQuery.
 
   ```<script type="text/javascript" src="/simpleDialog.js"></script>```
   
@@ -30,6 +30,14 @@ Include below code before </body> tag
 <script type="text/javascript>
 $.simpleDialog();
 </script>
+```
+
+#### Custom title and message 
+```
+$.simpleDialog({
+  title:"Alert Dialog",
+  message:"Alert Message"
+});
 ```
 ####  simpleDialog with callback
 ```
@@ -116,6 +124,11 @@ $.simpleDialog({
 $.simpleDialog({
   closeButton: true,
   closeButtonTemplate: '<button type="button" id ="cancel-btn" class="btn btn-default">{closeBtnText}</button>',
+});
+
+#### Remove close button from modal
+$.simpleDialog({
+  closeButton: false,
 });
 
 ## Built With

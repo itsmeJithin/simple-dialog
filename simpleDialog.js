@@ -79,11 +79,23 @@ $.simpleDialog = function (options, onSuccess, onClose) {
         }
 
         /**
+         * This function helps to prevent errors like "modal is transitioning"
+         */
+        function hideModal() {
+            var modal = $("#simple-dialog-modal");
+            var bsModal = modal.data('bs.modal');
+            bsModal["_isShown"] = false;
+            bsModal["_isTransitioning"] = false;
+            modal.data('bs.modal', bsModal);
+        }
+
+        /**
          * Handling confirm button click event. If callback is available perform callback operation
          */
-        $(document).on('click',"#confirm-btn", function (event) {
+        $(document).on('click', "#confirm-btn", function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
+            hideModal();
             if (typeof options.onSuccess === 'function' && options.onSuccess()) {
                 options.onSuccess();
             }
@@ -92,9 +104,10 @@ $.simpleDialog = function (options, onSuccess, onClose) {
         /**
          * Handling close button events
          */
-        $(document).on('click',"#cancel-btn", function (event) {
+        $(document).on('click', "#cancel-btn", function (event) {
             event.preventDefault();
             $('#simple-dialog-modal').modal('hide');
+            hideModal();
             if (typeof options.onCancel === 'function' && options.onCancel())
                 options.onCancel();
         });

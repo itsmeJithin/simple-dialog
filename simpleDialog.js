@@ -86,9 +86,11 @@ $.simpleDialog = function (options) {
             event.preventDefault();
             if (typeof options.onSuccess === 'function' && options.onSuccess) {
                 var data = options.onSuccess();
-                if (data) {
-                    $('#simple-dialog-modal-' + currentID).modal('hide');
-                }
+                setTimeout(function () {
+                    if (data || data === undefined) {
+                        $('#simple-dialog-modal-' + currentID).modal('hide');
+                    }
+                }, 0);
             } else {
                 $('#simple-dialog-modal-' + currentID).modal('hide');
             }

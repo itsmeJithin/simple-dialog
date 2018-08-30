@@ -84,12 +84,15 @@ $.simpleDialog = function (options) {
          */
         $(document).on('click', "#confirm-btn", function (event) {
             event.preventDefault();
-            $('#simple-dialog-modal-' + currentID).modal('hide');
-            if (typeof options.onSuccess === 'function' && options.onSuccess()) {
-                options.onSuccess();
+            if (typeof options.onSuccess === 'function' && options.onSuccess) {
+                var data = options.onSuccess();
+                if (data) {
+                    $('#simple-dialog-modal-' + currentID).modal('hide');
+                }
+            } else {
+                $('#simple-dialog-modal-' + currentID).modal('hide');
             }
         });
-
         /**
          * Handling close button events
          */

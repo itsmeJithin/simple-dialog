@@ -16,14 +16,14 @@
     "overlay",
     "backdrop"
   ],
-  "author": "Ovaqlab",
+  "author": "Jithin Vijayan",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ovaqlab/simpleDialog/issues"
   },
   "homepage": "https://github.com/ovaqlab/simpleDialog",
   "dependencies": {
-    "bootstrap": "^3.3.6"",
+    "bootstrap": "^3.3.6",
     "jquery": "^3.2.0"
   }
 }
